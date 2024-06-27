@@ -1,0 +1,32 @@
+<%-include('partials/header.ejs')%>
+    
+    <h2 class="text-center"><%=meal.strMeal%></h2>
+    <img src="<%=meal.strMealThumb%>" class="img-fluid" alt="...">
+
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+        aria-expanded="false" aria-controls="multiCollapseExample1">Ingredients</a>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
+        aria-expanded="false" aria-controls="multiCollapseExample2">Preparation</button>
+
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body">
+                   <%ingredients.forEach((elem)=>{%>
+                    <p>
+                        <%=elem.ing%>: <%=elem.measure%>
+                    </p>
+                   <%})%>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <div class="card card-body">
+                    <%=meal.strInstructions%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-include('partials/footer.ejs')%>

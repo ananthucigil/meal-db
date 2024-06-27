@@ -4,9 +4,9 @@
   <%data.forEach((elem)=>{%>
   <div class="col-sm-6 col-md-4 mb-5">
     <div class="card me-5 ms-5">
-      <img src="<%=elem.strMealThumb%>" class="card-img-top" alt="...">
+      <img src="<%=elem.strMealThumb%>" class="card-img-top" alt="..." width="50">
       <div class="card-body">
-        <h5 class="card-title"><%=elem.strMeal%></h5>
+        <a class="card-title fs-4 text-decoration-none" href="/meal/<%=elem.idMeal%>"><%=elem.strMeal%></a>
       </div>
     </div>
   </div>
