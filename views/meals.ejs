@@ -1,32 +1,42 @@
 <%-include('partials/header.ejs')%>
     
     <h2 class="text-center"><%=meal.strMeal%></h2>
-    <img src="<%=meal.strMealThumb%>" class="img-fluid" alt="...">
-
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+    <div class="text-center mb-5">
+        <img src="<%=meal.strMealThumb%>" alt="..." style="width:350px;border-radius:25%">
+    </div>
+    
+    
+   
+        <a style="width:350px" class="btn btn-primary d-block mb-3 mx-auto" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
         aria-expanded="false" aria-controls="multiCollapseExample1">Ingredients</a>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
-        aria-expanded="false" aria-controls="multiCollapseExample2">Preparation</button>
-
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="card card-body">
+        
+            <div class="collapse multi-collapse mb-4" id="multiCollapseExample1">
+                <div class="card card-body text-center">
                    <%ingredients.forEach((elem)=>{%>
                     <p>
-                        <%=elem.ing%>: <%=elem.measure%>
+                        <%=elem.ing%>
+                        <%if(elem.measure!==" "){%>
+                            : <%=elem.measure%> 
+                        <%}%>
+                        
                     </p>
                    <%})%>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
+        <button style="width:350px" class="btn btn-primary d-block mx-auto mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
+        aria-expanded="false" aria-controls="multiCollapseExample2">Preparation</button>
+        
+            <div class="collapse multi-collapse mb-4" id="multiCollapseExample2">
                 <div class="card card-body">
-                    <%=meal.strInstructions%>
+                    <ul>
+                        <%prep.forEach((elem)=>{%>
+                            <%if(elem){%>
+                            <li><%=elem%></li>  
+                                <%}%>
+                        <%})%>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
 
     <%-include('partials/footer.ejs')%>

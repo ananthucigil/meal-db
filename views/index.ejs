@@ -2,9 +2,9 @@
 <%if(locals.data){%>
 <div class="row mt-5">
   <%data.forEach((elem)=>{%>
-  <div class="col-sm-6 col-md-4 mb-5">
-    <div class="card me-5 ms-5">
-      <img src="<%=elem.strMealThumb%>" class="card-img-top" alt="..." width="50">
+  <div class="col-sm-6 col-md-4 mb-5 text-center border-0" style="width:372px">
+    <div class="card me-5 ms-5 border-0">
+      <img src="<%=elem.strMealThumb%>" class="card-img-top" alt="..." style="width:250px; border-radius:25%">
       <div class="card-body">
         <a class="card-title fs-4 text-decoration-none" href="/meal/<%=elem.idMeal%>"><%=elem.strMeal%></a>
       </div>

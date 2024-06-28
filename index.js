@@ -26,6 +26,8 @@ app.get('/meal/:id',async(req,res)=>{
     const ingredients = [];
     const measure = [];
     const ingredientsWithMeasure = [];
+    const preparation = mealDetails.strInstructions.split(/\d*\r\n\r\n/);
+
     for(let property in mealDetails){
         if(/strIngredient\d+/.test(property)){
             if(mealDetails[property]){
@@ -41,7 +43,7 @@ app.get('/meal/:id',async(req,res)=>{
     for(let i = 0;i < ingredients.length;i++){
         ingredientsWithMeasure.push({ing:ingredients[i],measure:measure[i]});
     }
-    res.render('meals.ejs',{category:dropdown,meal:mealDetails,ingredients:ingredientsWithMeasure});
+    res.render('meals.ejs',{category:dropdown,meal:mealDetails,ingredients:ingredientsWithMeasure,prep:preparation});
 
 })
 
@@ -53,7 +55,7 @@ app.get('/search',async(req,res)=>{
     }else if(response.data.meals.length===1){
       res.redirect(`/meal/${response.data.meals[0].idMeal}`);
     }else{
-      res.redirect(`/category/${id}`);
+      res.render('index.ejs',{data:response.data.meals,category:dropdown});
     }
 })
 
