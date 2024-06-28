@@ -15,11 +15,17 @@ app.get('/',async(req,res)=>{
     }
 })
 app.get('/category/:id',async(req,res)=>{
+   try{
     let id = req.params.id;
     const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`);
     res.render('index.ejs',{data:response.data.meals,category:dropdown});
+   }catch(error){
+    console.log(error.response);
+    res.status(500).send("An error occured");
+}
 })
 app.get('/meal/:id',async(req,res)=>{
+   try{
     let id = req.params.id;
     const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     let mealDetails = response.data.meals[0];
@@ -44,19 +50,27 @@ app.get('/meal/:id',async(req,res)=>{
         ingredientsWithMeasure.push({ing:ingredients[i],measure:measure[i]});
     }
     res.render('meals.ejs',{category:dropdown,meal:mealDetails,ingredients:ingredientsWithMeasure,prep:preparation});
-
+}catch(error){
+    console.log(error.response);
+    res.status(500).send("An error occured");
+}
 })
 
 app.get('/search',async(req,res)=>{
+   try{
     let id = req.query.search
     const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`);
     if(response.data.meals===null){
-      res.send('<h1>Sorry, no such dish.</h1>'); 
+      res.render('error.ejs'); 
     }else if(response.data.meals.length===1){
       res.redirect(`/meal/${response.data.meals[0].idMeal}`);
     }else{
       res.render('index.ejs',{data:response.data.meals,category:dropdown});
     }
+   }catch(error){
+    console.log(error.response);
+    res.status(500).send("An error occured");
+} 
 })
 
 app.listen(port,()=>{
